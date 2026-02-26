@@ -32,7 +32,7 @@ public class FileStorageService
         var existing = await _context.FileBlob
             .FirstOrDefaultAsync(b => b.Hash == hash);
 
-        if (existing != null)
+        if (existing != null && System.IO.File.Exists(existing.StoragePath))
         {
             return existing;
         }

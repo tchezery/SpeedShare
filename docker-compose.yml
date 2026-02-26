@@ -12,6 +12,7 @@ services:
       - ConnectionStrings__Default=Data Source=db/document-storage.db
     volumes:
       - ./docker_data/db:/app/db:Z
+      - ./docker_data/uploads:/app/Uploads:Z
 
   frontend:
     build:
