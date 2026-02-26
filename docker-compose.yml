@@ -11,7 +11,7 @@ services:
       - JWT_KEY=${JWT_KEY:-super_secret_key_change_me_in_prod}
       - ConnectionStrings__Default=Data Source=db/document-storage.db
     volumes:
-      - ./docker_data/db:/app/db
+      - ./docker_data/db:/app/db:Z
 
   frontend:
     build:

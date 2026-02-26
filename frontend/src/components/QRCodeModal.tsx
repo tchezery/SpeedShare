@@ -2,6 +2,7 @@ import { QRCodeSVG } from 'qrcode.react'
 import { X, Copy, Check, Download, Mail, MessageCircle, Calendar, Smartphone } from 'lucide-react'
 import { useState } from 'react'
 import Button from './Button'
+import { copyToClipboard } from '../utils/clipboard'
 
 interface QRCodeModalProps {
   code: string
@@ -21,10 +22,12 @@ export default function QRCodeModal({ code, expirationDate, onClose }: QRCodeMod
     minute: '2-digit'
   })
 
-  const handleCopy = () => {
-    navigator.clipboard.writeText(code)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
+  const handleCopy = async () => {
+    const success = await copyToClipboard(code)
+    if (success) {
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    }
   }
 
   const handleDownloadTxt = () => {

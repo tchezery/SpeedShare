@@ -15,6 +15,7 @@ import Footer from '../components/Footer'
 import { fileService } from '../services/fileService'
 import { useStorage } from '../context/StorageContext'
 import { useNotification } from '../context/NotificationContext'
+import { copyToClipboard } from '../utils/clipboard'
 
 export default function Home() {
   const navigate = useNavigate()
@@ -172,7 +173,7 @@ export default function Home() {
             // If we navigate, we lose the modal. Let's assume the button actions "simulates" it or we handle it here.
             // For now, I'll update the context.
           }}
-          onShare={() => {
+          onShare={async () => {
             if (navigator.share) {
               navigator.share({
                 title: 'Document Storage',
@@ -187,7 +188,7 @@ export default function Home() {
               });
             } else {
               // Fallback: copiar link
-              navigator.clipboard.writeText(window.location.href);
+              await copyToClipboard(window.location.href);
               share();
               showNotification('Link copiado! Obrigado por compartilhar. Você ganhou +1GB.', 'success');
               setShowUpgradeModal(false);
