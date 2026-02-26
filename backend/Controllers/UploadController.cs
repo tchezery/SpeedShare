@@ -132,28 +132,50 @@ public class UploadController : ControllerBase
     }
 
     [HttpGet("downloadV2/{code}")]
-    public async Task<IActionResult> DownloadV2(string code)
+    public async Task<IActionResult> DownloadV2(string code, [FromQuery] bool zip = false)
     {
-
         var root = await _context.FileNode
             .FirstOrDefaultAsync(n => n.Name == code && n.ParentId == null);
-        
+
         if (root == null)
         {
             return NotFound("Node não encontrado");
         }
 
+        var children = await _context.FileNode
+            .Where(n => n.ParentId == root.Id)
+            .ToListAsync();
+
+        // Arquivo único sem zip forçado → retorna o arquivo diretamente
+        if (!zip && children.Count == 1 && children[0].Type == "file")
+        {
+            var fileNode = await _context.FileNode
+                .Include(n => n.Blob)
+                .FirstAsync(n => n.Id == children[0].Id);
+
+            if (fileNode.Blob == null || !System.IO.File.Exists(fileNode.Blob.StoragePath))
+            {
+                return NotFound("Arquivo não encontrado no armazenamento.");
+            }
+
+            var provider = new Microsoft.AspNetCore.StaticFiles.FileExtensionContentTypeProvider();
+            if (!provider.TryGetContentType(fileNode.Name, out var contentType))
+            {
+                contentType = "application/octet-stream";
+            }
+
+            var fileStream = System.IO.File.OpenRead(fileNode.Blob.StoragePath);
+            return File(fileStream, contentType, fileNode.Name);
+        }
+
+        // Múltiplos arquivos ou zip forçado → retorna ZIP
         var memoryStream = new MemoryStream();
 
-        using (var zip = new ZipArchive(memoryStream, ZipArchiveMode.Create, true))
+        using (var zipArchive = new ZipArchive(memoryStream, ZipArchiveMode.Create, true))
         {
-            var children = await _context.FileNode
-                .Where(n => n.ParentId == root.Id)
-                .ToListAsync();
-
             foreach (var child in children)
             {
-                await AddNodeToZip(zip, child, "");
+                await AddNodeToZip(zipArchive, child, "");
             }
         }
 

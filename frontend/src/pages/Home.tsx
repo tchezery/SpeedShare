@@ -72,21 +72,19 @@ export default function Home() {
   }
 
   // Called when user clicks 'Download' inside the modal
-  const performDownload = async () => {
+  const performDownload = async (asZip: boolean) => {
     if (!downloadCode) return
 
     try {
-      const { blob, filename } = await fileService.downloadFolderZip(downloadCode)
+      const { blob, filename } = await fileService.downloadFiles(downloadCode, asZip)
       const url = window.URL.createObjectURL(blob)
       const a = document.createElement('a')
       a.href = url
-      a.download = filename || `arquivo-${downloadCode}` 
+      a.download = filename || `arquivo-${downloadCode}`
       document.body.appendChild(a)
       a.click()
       window.URL.revokeObjectURL(url)
       document.body.removeChild(a)
-      // Optional: Close modal after download starts?
-      // setShowFileBrowser(false) 
     } catch (error) {
       console.error('Download failed:', error)
       showNotification('Erro ao baixar arquivo. Verifique se o código está correto e não expirou.', 'error')

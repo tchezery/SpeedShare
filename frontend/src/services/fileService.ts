@@ -14,8 +14,9 @@ export const fileService = {
   //   return httpClient.download(`/file/download/${code}`);
   // },
 
-  downloadFolderZip: async (code: string): Promise<{ blob: Blob; filename: string | null }> => {
-    return httpClient.download(`/file/downloadV2/${code}`);
+  downloadFiles: async (code: string, asZip: boolean = false): Promise<{ blob: Blob; filename: string | null }> => {
+    const endpoint = asZip ? `/file/downloadV2/${code}?zip=true` : `/file/downloadV2/${code}`;
+    return httpClient.download(endpoint);
   },
 
   // getFileInfo: async (code: string): Promise<FileNode> => {

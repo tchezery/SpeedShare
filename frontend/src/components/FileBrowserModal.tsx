@@ -7,7 +7,7 @@ import Button from './Button'
 interface FileBrowserModalProps {
   code: string
   onClose: () => void
-  onDownload: () => void
+  onDownload: (asZip: boolean) => void
 }
 
 // Helper to render file icons based on extension
@@ -87,6 +87,9 @@ export default function FileBrowserModal({ code, onClose, onDownload }: FileBrow
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
+  const topLevelChildren = structure?.children ?? []
+  const isSingleFile = !loading && topLevelChildren.length === 1 && topLevelChildren[0].type === 'file'
+
   useEffect(() => {
     const fetchStructure = async () => {
       try {
@@ -152,19 +155,29 @@ export default function FileBrowserModal({ code, onClose, onDownload }: FileBrow
 
         {/* Footer Actions */}
         <div className="p-4 bg-[#252526] border-t border-[#1e1e1e] flex justify-end items-center space-x-3">
-          <Button 
-            onClick={onClose} 
-            variant="ghost" 
+          <Button
+            onClick={onClose}
+            variant="ghost"
             className="text-[#cccccc] hover:text-white hover:bg-[#2a2d2e] h-8 text-sm"
           >
             Cancel
           </Button>
-          <Button 
-            onClick={onDownload} 
+          {isSingleFile && (
+            <Button
+              onClick={() => onDownload(true)}
+              variant="ghost"
+              className="text-[#cccccc] hover:text-white hover:bg-[#2a2d2e] h-8 text-sm px-4 rounded-sm flex items-center border border-[#555]"
+            >
+              <Download className="w-4 h-4 mr-2" />
+              Baixar como ZIP
+            </Button>
+          )}
+          <Button
+            onClick={() => onDownload(false)}
             className="bg-[#007acc] hover:bg-[#0062a3] text-white h-8 text-sm px-4 rounded-sm flex items-center"
           >
             <Download className="w-4 h-4 mr-2" />
-            Download All
+            {isSingleFile ? 'Download' : 'Download ZIP'}
           </Button>
         </div>
       </div>
