@@ -16,4 +16,5 @@ WORKDIR /app
 EXPOSE 8080
 ENV ASPNETCORE_URLS=http://+:8080
 COPY --from=publish /app/publish .
+RUN mkdir -p /app/db
 ENTRYPOINT ["dotnet", "backend.dll"]
