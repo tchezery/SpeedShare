@@ -96,9 +96,15 @@ export const httpClient = {
     return `${BASE_URL}${endpoint}`;
   },
 
-  download: async (endpoint: string): Promise<{ blob: Blob; filename: string | null }> => {
+  download: async (endpoint: string, onProgress?: (progress: number) => void): Promise<{ blob: Blob; filename: string | null }> => {
     const response = await api.get(endpoint, {
       responseType: 'blob',
+      onDownloadProgress: (progressEvent) => {
+        if (onProgress && progressEvent.total) {
+          const percentComplete = (progressEvent.loaded / progressEvent.total) * 100;
+          onProgress(percentComplete);
+        }
+      },
     });
     
     let filename: string | null = null;
