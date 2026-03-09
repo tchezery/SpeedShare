@@ -3,13 +3,13 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
-    container_name: document-storage-backend
+    container_name: speed-share-backend
     ports:
       - "5116:8080"
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - JWT_KEY=${JWT_KEY:-super_secret_key_change_me_in_prod}
-      - ConnectionStrings__Default=Data Source=db/document-storage.db
+      - ConnectionStrings__Default=Data Source=db/speed-share.db
     volumes:
       - ./docker_data/db:/app/db:Z
       - ./docker_data/uploads:/app/Uploads:Z
@@ -20,7 +20,7 @@ services:
       dockerfile: Dockerfile
       args:
         - VITE_API_URL=${VITE_API_URL:-/api}
-    container_name: document-storage-frontend
+    container_name: speed-share-frontend
     ports:
       - "5173:80"
     depends_on:

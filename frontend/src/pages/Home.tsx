@@ -174,8 +174,8 @@ export default function Home() {
           onShare={async () => {
             if (navigator.share) {
               navigator.share({
-                title: 'Document Storage',
-                text: 'Conheça o Document Storage - Guarde seus documentos com segurança!',
+                title: 'Speed Share',
+                text: 'Conheça o Speed Share - Guarde seus documentos com segurança!',
                 url: window.location.href
               }).then(() => {
                 share();

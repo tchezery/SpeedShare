@@ -1,4 +1,4 @@
-# DocumentStorage
+# Speed Share
 
 This project was born out of a personal need I had for a simple and reliable document storage solution. After building it for myself, I realized it could be useful for others too, so I decided to open it up to help the community.
 

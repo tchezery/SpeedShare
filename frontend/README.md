@@ -1,6 +1,6 @@
-# Document Storage - Frontend
+# Speed Share - Frontend
 
-Frontend do projeto Document Storage, uma plataforma para armazenar documentos de forma temporária e segura.
+Frontend do projeto Speed Share, uma plataforma para armazenar documentos de forma temporária e segura.
 
 ## Características
 

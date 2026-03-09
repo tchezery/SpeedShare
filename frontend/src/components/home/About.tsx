@@ -4,10 +4,10 @@ export default function About() {
   return (
     <div id="projeto" className="mb-24 scroll-mt-20">
       <div className="bg-white rounded-3xl p-8 md:p-12 card-shadow">
-        <h2 className="text-4xl font-semibold mb-8 text-gray-900 tracking-tight">O Document Storage</h2>
+        <h2 className="text-4xl font-semibold mb-8 text-gray-900 tracking-tight">O Speed Share</h2>
         <div className="max-w-3xl space-y-6 text-xl text-gray-500 font-medium leading-relaxed">
           <p>
-            O Document Storage foi criado para ajudar pessoas que precisam armazenar 
+            O Speed Share foi criado para ajudar pessoas que precisam armazenar 
             documentos temporariamente, especialmente quando estão usando computadores 
             de terceiros e não podem salvar arquivos localmente.
           </p>
