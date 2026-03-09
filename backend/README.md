@@ -1,6 +1,6 @@
-# Document Storage – Backend
+#Speed Share – Backend
 
-Backend of the Document Storage project, an API responsible for authentication, authorization, and data management for temporary and secure document storage.
+Backend of the Speed Share project, an API responsible for authentication, authorization, and data management for temporary and secure document storage.
 
 ## Features
 
@@ -84,7 +84,7 @@ backend/
 
 Notes
 
-This backend is designed to work together with the Document Storage Frontend.
+This backend is designed to work together with the Speed Share Frontend.
 
 JWT tokens can be used to protect routes with [Authorize].
 

@@ -42,7 +42,7 @@ export default function QRCodeModal({ code, expirationDate, onClose }: QRCodeMod
   }
 
   // const handleEmail = () => {
-  //   const subject = encodeURIComponent('Código de Download - Document Storage')
+  //   const subject = encodeURIComponent('Código de Download - Speed Share')
   //   const body = encodeURIComponent(
   //     `Seu código de download é: ${code}\n\n` +
   //     `Data de Expiração: ${formattedDate}\n` +

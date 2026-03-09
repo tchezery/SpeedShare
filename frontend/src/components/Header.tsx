@@ -52,11 +52,11 @@ export default function Header({ onLoginClick }: HeaderProps) {
             <Link to="/" onClick={handleScrollToTop} className="flex items-center space-x-2 z-50">
               <img 
                 src="/logo.png" 
-                alt="Document Storage Logo" 
+                alt="Speed Share Logo" 
                 className="w-8 h-8 object-contain rounded-lg transition-transform active:scale-95" 
               />
               <div className="flex items-baseline space-x-2">
-                              <span className="text-lg font-semibold text-gray-900 tracking-tight">Document Storage</span>
+                              <span className="text-lg font-semibold text-gray-900 tracking-tight">Speed Share</span>
                               {!isMenuOpen && (
                                 <a 
                                   href="https://www.linkedin.com/in/tchezery" 
@@ -162,7 +162,7 @@ export default function Header({ onLoginClick }: HeaderProps) {
             </button>
             
             <p className="text-center text-xs text-gray-400 pt-4">
-              Document Storage Mobile v1.0
+              Speed Share Mobile v1.0
             </p>
           </div>
         </div>

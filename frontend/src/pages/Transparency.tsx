@@ -19,7 +19,7 @@ export default function Transparency() {
       content: (
         <>
           <p className="mb-4">
-            O Document Storage foi criado para resolver um problema real: pessoas que precisam 
+            O Speed Share foi criado para resolver um problema real: pessoas que precisam 
             guardar documentos temporariamente, especialmente quando estão usando computadores 
             de terceiros e não podem salvar arquivos localmente.
           </p>
